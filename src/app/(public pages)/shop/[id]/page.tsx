@@ -31,21 +31,50 @@ export default function ProductPage() {
 
   const { addToCart, addToWishlist } = useShop();
   const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (id) {
-      client
-        .fetch(`*[_type == "product" && _id == $id][0]`, { id })
-        .then((data) => setProduct(data));
+    if (!id) {
+      console.warn("No ID found in route parameters");
+      setLoading(false);
+      return;
     }
+
+    console.log("Fetching product with ID:", id);
+
+    client
+      .fetch(`*[_type == "product" && _id == $id][0]`, { id })
+      .then((data) => {
+        if (data) {
+          console.log("Fetched product:", data);
+          setProduct(data);
+        } else {
+          console.error("Product not found for ID:", id);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch product:", err);
+        setLoading(false);
+      });
   }, [id]);
 
-  if (!product)
+  if (loading) {
     return (
       <div>
         <DetailShimmer />
       </div>
     );
+  }
+
+  if (!product) {
+    return (
+      <div className="text-center text-gray-500 py-10">
+        <h1 className="text-2xl font-bold text-[#101750]">Product Not Found</h1>
+        <p>We couldn&apos;t find the product you were looking for.</p>
+      </div>
+    );
+  }
 
   const discountedPrice =
     product.discountPercentage > 0
@@ -55,16 +84,24 @@ export default function ProductPage() {
   return (
     <div className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-20 mb-5">
       <div className="flex flex-col lg:flex-row gap-8 mt-8 items-start lg:items-center">
-        <div className="w-full lg:w-1/2 h-auto bg-[#F6F7FB] rounded-lg overflow-hidden shadow-md">
-          <Image
-            src={urlFor(product.image.asset._ref).url()}
-            alt={product.name}
-            width={500}
-            height={500}
-            className="h-full w-full object-contain"
-          />
-        </div>
+        {/* Product Image */}
+        {product.image?.asset?._ref ? (
+          <div className="w-full lg:w-1/2 h-auto bg-[#F6F7FB] rounded-lg overflow-hidden shadow-md">
+            <Image
+              src={urlFor(product.image.asset._ref).url()}
+              alt={product.name}
+              width={500}
+              height={500}
+              className="h-full w-full object-contain"
+            />
+          </div>
+        ) : (
+          <div className="w-full lg:w-1/2 h-auto bg-[#F6F7FB] rounded-lg overflow-hidden shadow-md flex items-center justify-center">
+            <p className="text-gray-500">No image available</p>
+          </div>
+        )}
 
+        {/* Product Details */}
         <div className="w-full md:w-1/2 flex flex-col gap-4">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#151875]">
             {product.name}
@@ -83,7 +120,9 @@ export default function ProductPage() {
               ${discountedPrice}
             </p>
             {product.discountPercentage > 0 && (
-              <p className="text-gray-500 line-through">${product.price}</p>
+              <p className="text-gray-500 line-through">
+                ${product.price}
+              </p>
             )}
           </div>
           <p className="text-gray-700">{product.description}</p>
@@ -109,6 +148,8 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
+
+      {/* Suggestions Section */}
       <SuggestionsComponent />
     </div>
   );
