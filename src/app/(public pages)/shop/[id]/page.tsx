@@ -1,4 +1,5 @@
 "use client";
+
 import { useShop } from "../../../../../context/ShopContext";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
@@ -7,6 +8,7 @@ import SuggestionsComponent from "@/components/Suggestions";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import DetailShimmer from "@/components/DetailShimmer";
+import { useRouter } from "next/router";
 
 interface Product {
   _id: string;
@@ -24,20 +26,10 @@ interface Product {
   category: string;
 }
 
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default function ProductPage({ params }: ProductPageProps) {
-  const [id, setId] = useState<string | null>(null);
-
-  useEffect(() => {
-    Promise.resolve(params).then((resolvedParams) => {
-      setId(resolvedParams.id);
-    });
-  }, [params]);
+export default function ProductPage() {
+  const router = useRouter();
+  const { query } = useRouter();
+  const id = query?.id as string; // Retrieve `id` dynamically from the query string.
 
   const { addToCart, addToWishlist } = useShop();
   const [product, setProduct] = useState<Product | null>(null);
