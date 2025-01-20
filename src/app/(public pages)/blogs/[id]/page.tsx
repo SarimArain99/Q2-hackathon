@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import blogs from "@/components/blogs";
 import Image from "next/image";
-import BlogShimmer from "../../../../components/BlogDetailShimmer"; // Import the shimmer component
+import BlogShimmer from "@/components/BlogDetailShimmer";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,9 +21,15 @@ interface Blog {
   author: string;
 }
 
-function BlogDetails({ params } : { params: { id: string } }) {
+interface BlogDetailsProps {
+  params: {
+    id: string;
+  };
+}
+
+const BlogDetails: React.FC<BlogDetailsProps> = ({ params }) => {
   const { id } = params;
-  const [blog, setBlog] = useState< Blog | null>(null);
+  const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,12 +39,12 @@ function BlogDetails({ params } : { params: { id: string } }) {
       setLoading(false);
     };
 
-    const timeoutId = setTimeout(fetchBlog, 1000); // Simulate 1 second loading
+    const timeoutId = setTimeout(fetchBlog, 1000);
     return () => clearTimeout(timeoutId);
   }, [id]);
 
   if (loading) {
-    return <BlogShimmer />; // Use shimmer while loading
+    return <BlogShimmer />;
   }
 
   if (!blog) {
@@ -52,7 +58,6 @@ function BlogDetails({ params } : { params: { id: string } }) {
 
   return (
     <div className="text-[#101750]">
-      {/* Header */}
       <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold py-5 text-[#101750]">
           {blog.title}
@@ -74,10 +79,8 @@ function BlogDetails({ params } : { params: { id: string } }) {
         </Breadcrumb>
       </div>
 
-      {/* Blog Content */}
       <div className="container mx-auto px-4 py-10">
         <article className="overflow-hidden flex flex-col lg:flex-row items-center">
-          {/* Blog Image */}
           <Image
             src={blog.image}
             alt={blog.title}
@@ -87,7 +90,7 @@ function BlogDetails({ params } : { params: { id: string } }) {
             priority={true}
           />
           <div className="p-6 max-w-[50%]">
-            <h1 className="text-xl sm:text3xl md:text-4xl font-extrabold mb-4 text-[#101750]">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold mb-4 text-[#101750]">
               {blog.title}
             </h1>
             <div className="flex items-center text-gray-600 mb-4">
@@ -102,6 +105,6 @@ function BlogDetails({ params } : { params: { id: string } }) {
       </div>
     </div>
   );
-}
+};
 
 export default BlogDetails;
