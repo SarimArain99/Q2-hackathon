@@ -10,37 +10,44 @@ function Header() {
     <>
       <TopHeader />
       <div className="bg-white py-2">
-        <div className="flex items-center justify-between px-6 lg:justify-around">
+        <div className="flex items-center justify-between px-4 sm:px-8 md:px-16 lg:px-20">
           <h1 className="text-[34px] font-bold text-[#0D0E43]">Hekto</h1>
-          <div className="hidden lg:flex items-center gap-8">
-            <select name="" id="" className="outline-none text-[#FB2E86]">
-              <option value="">
-                <Link href="/">Home</Link>
-              </option>
-            </select>
-            <Link href="/pages" className="text-[#0D0E43] hover:text-[#FB2E86]">
-              Pages
+          <div className="hidden lg:flex items-center gap-7">
+            <Link
+              href="/"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
+            >
+              Home
             </Link>
             <Link
-              href="/shop-list"
-              className="text-[#0D0E43] hover:text-[#FB2E86]"
+              href="/blogs"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
             >
-              Products
-            </Link>
-            <Link href="/blog-page" className="text-[#0D0E43] hover:text-[#FB2E86]">
               Blogs
             </Link>
-            <Link href="/about-us" className="text-[#0D0E43] hover:text-[#FB2E86]">
+            <Link
+              href="/about-us"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
+            >
               About Us
             </Link>
-            <Link href="/shop-grid-default" className="text-[#0D0E43] hover:text-[#FB2E86]">
+            <Link
+              href="/shop"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
+            >
               Shop
             </Link>
             <Link
               href="/contact"
-              className="text-[#0D0E43] hover:text-[#FB2E86]"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
             >
               Contact
+            </Link>
+            <Link
+              href="/help"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
+            >
+              Help
             </Link>
           </div>
           <div className="hidden lg:flex items-center border-2 overflow-hidden">
@@ -84,29 +91,41 @@ function Header() {
         </div>
         {menuOpen && (
           <div className="lg:hidden flex flex-col items-start bg-white px-6 py-4 space-y-4">
-            <Link href="/" className="text-[#0D0E43] hover:text-[#FB2E86]">
+            <Link
+              href="/"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
+            >
               Home
             </Link>
-            <Link href="/pages" className="text-[#0D0E43] hover:text-[#FB2E86]">
-              Pages
-            </Link>
             <Link
-              href="/products"
-              className="text-[#0D0E43] hover:text-[#FB2E86]"
+              href="/blogs"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
             >
-              Products
-            </Link>
-            <Link href="/blogs" className="text-[#0D0E43] hover:text-[#FB2E86]">
               Blogs
             </Link>
-            <Link href="/shop" className="text-[#0D0E43] hover:text-[#FB2E86]">
+            <Link
+              href="/about-us"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
+            >
+              About Us
+            </Link>
+            <Link
+              href="/shop"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
+            >
               Shop
             </Link>
             <Link
               href="/contact"
-              className="text-[#0D0E43] hover:text-[#FB2E86]"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
             >
               Contact
+            </Link>
+            <Link
+              href="/help"
+              className="text-[#0D0E43] hover:text-[#FB2E86] font-semibold"
+            >
+              Help
             </Link>
             <div className="flex border-2 overflow-hidden">
               <input

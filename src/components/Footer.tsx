@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-[#EEEFFB] px-10 py-16 text-[#8A8FB9]">
       <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-10">
@@ -19,60 +21,58 @@ function Footer() {
           </div>
           <p className="text-[16px] leading-relaxed">
             Contact Info:
-            <br /> 17 Princess Road, London, Greater London NW1 8JR, UK
+            <br /> 123 Maple Street, London, Greater London NW1 8JR, UK
           </p>
         </div>
-
         <div className="flex flex-col gap-5">
           <h2 className="text-2xl font-semibold text-black text-center">
-            Category
+            Categories
           </h2>
           <ul className="space-y-2 text-center">
-            <li>Laptops & Computers</li>
-            <li>Cameras & Photography</li>
-            <li>Smart Phones & Tablets</li>
-            <li>Video Games & Consoles</li>
-            <li>Waterproof Headphones</li>
+            <li>Living Room Furniture</li>
+            <li>Bedroom Furniture</li>
+            <li>Dining Room Furniture</li>
+            <li>Office Furniture</li>
+            <li>Outdoor Furniture</li>
           </ul>
         </div>
-
         <div className="flex flex-col gap-5">
           <h2 className="text-2xl font-semibold text-black text-center">
             Customer Care
           </h2>
           <ul className="space-y-2 text-center">
             <li>My Account</li>
-            <li>Discount</li>
-            <li>Orders History</li>
-            <li>Returns</li>
-            <li>Order Tracking</li>
+            <li>Track My Order</li>
+            <li>Shipping & Delivery</li>
+            <li>Returns & Exchanges</li>
+            <li>Contact Support</li>
           </ul>
         </div>
-
         <div className="flex flex-col gap-5">
           <h2 className="text-2xl font-semibold text-black text-center">
             Pages
           </h2>
-          <ul className="space-y-2 text-center">
-            <li>Blog</li>
-            <li>Browse the Shop</li>
-            <li>Category</li>
-            <li>Pre-Built Pages</li>
-            <li>Visual Composer Elements</li>
+          <ul className="space-y-2 text-center flex flex-col">
+            <Link href="/">Home</Link>
+            <Link href="/shop">Shop</Link>
+            <Link href="/about-us">About Us</Link>
+            <Link href="/contact">Contact</Link>
+            <Link href="blogs">Blogs</Link>
+            <Link href="help">Help</Link>
           </ul>
         </div>
       </div>
 
       <div className="mt-10 border-t border-gray-300 pt-5 text-sm text-gray-600 flex flex-wrap items-center justify-between sm:justify-around gap-5">
         <p className="text-center w-full sm:w-auto">
-          &copy; 2024 Hekto. All Rights Reserved.
+          &copy; 2024-{currentYear} Hekto. All Rights Reserved.
         </p>
         <Image
           src="/social.png"
-          alt=""
+          alt="Social Media Icons"
           height={1000}
           width={1000}
-          className="h-6 w-20 mx-auto sm:mx-0"
+          className="h-6 w-24 mx-auto sm:mx-0"
         />
       </div>
     </footer>

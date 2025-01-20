@@ -23,11 +23,7 @@ function page() {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/">Components</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Shop List</BreadcrumbPage>
+              <BreadcrumbPage>Contact</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -40,10 +36,13 @@ function page() {
                 Information About Us
               </h2>
               <p className="max-w-xl text-[#8A8FB9] mx-auto">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis
-                neque ultrices mattis aliquam, malesuada diam est. Maecenas sem
-                tristique amet erat vitae eget dolor lobortis. Accumsan faucibus
-                vitae lobortis quis bibendum quam.
+                At our ecommerce platform, we are committed to providing our
+                customers with a seamless shopping experience. Our team is
+                dedicated to offering high-quality products, exceptional
+                customer service, and fast, reliable shipping. We believe in
+                building lasting relationships with our customers by
+                consistently delivering value and satisfaction. Thank you for
+                choosing us as your trusted shopping destination.
               </p>
               <div className="flex justify-center mt-4 space-x-2">
                 <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
@@ -83,9 +82,11 @@ function page() {
                 Get In Touch
               </h2>
               <p className="mb-4 max-w-xl text-[#8A8FB9] mx-auto">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis
-                neque ultrices tristique amet erat vitae eget dolor los vitae
-                lobortis quis bibendum quam.
+                We would love to hear from you! Whether you have a question
+                about our products, feedback on your shopping experience, or
+                need assistance with an order, our team is here to help. Please
+                fill out the form below, and we will get back to you as soon as
+                possible.
               </p>
               <form className="space-y-4 items-start flex flex-col w-full">
                 <div className="flex flex-wrap gap-4">

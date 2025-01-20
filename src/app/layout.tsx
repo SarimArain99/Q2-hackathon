@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ShopProvider } from "../../context/ShopContext";
 
 export const metadata: Metadata = {
   title: "Q2 hackathon UI clone",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <ShopProvider>
+        <body>{children}</body>
+      </ShopProvider>
     </html>
   );
 }

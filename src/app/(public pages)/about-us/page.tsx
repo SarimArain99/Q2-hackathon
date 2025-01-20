@@ -14,17 +14,13 @@ function page() {
   return (
     <div>
       <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold py-5">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold py-5 text-[#0d0e43]">
           About Us
         </h2>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Components</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
@@ -47,13 +43,24 @@ function page() {
           </div>
           <div className="flex flex-col items-start md:w-1/2 text-start">
             <h2 className="text-2xl md:text-3xl font-bold mt-4">
-              Know About Our Ecommerce Business, History
+              Learn About Our Journey and Mission
             </h2>
             <p className="mt-2 text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              efficitur velit sit amet aliquam malesuada. Nam malesuada ex nibh,
-              ac tincidunt velit egestas eget. Sed eleifend, lorem at accumsan
-              faucibus, velit libero bibendum quam.
+              Founded in 2020, our ecommerce business has been dedicated to
+              providing top-quality products to our customers worldwide. Our
+              mission is to create a seamless and enjoyable shopping experience
+              by offering a wide range of products, competitive pricing, and
+              exceptional customer service. Over the years, we have grown and
+              adapted to meet the changing needs of our customers, while staying
+              true to our core values of integrity, innovation, and excellence.
+            </p>
+            <p className="mt-2 text-gray-600">
+              Our team is composed of passionate professionals who are committed
+              to delivering the best possible experience for our customers. From
+              sourcing the finest products to ensuring timely delivery, we take
+              pride in every aspect of our business. We believe in building
+              long-lasting relationships with our customers and are constantly
+              striving to exceed their expectations.
             </p>
             <Link
               href="/contact"
@@ -71,22 +78,22 @@ function page() {
               {
                 icon: "🚚",
                 title: "Free Delivery",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas purus gravida.",
+                desc: "We offer free delivery on all orders to ensure you get your products without any additional cost.",
               },
               {
                 icon: "💯",
                 title: "100% Cash Back",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas purus gravida.",
+                desc: "Our 100% cash back guarantee ensures that you are completely satisfied with your purchase or your money back.",
               },
               {
                 icon: "🏆",
                 title: "Quality Product",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas purus gravida.",
+                desc: "We are committed to providing high-quality products that meet the highest standards of excellence.",
               },
               {
                 icon: "⏰",
                 title: "24/7 Support",
-                desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas purus gravida.",
+                desc: "Our customer support team is available 24/7 to assist you with any inquiries or issues.",
               },
             ].map((feature, index) => (
               <div key={index} className="p-4 border rounded-lg text-center">
@@ -120,10 +127,9 @@ function page() {
           <div className="flex flex-col justify-center items-center px-4">
             <p className="text-xl font-bold">Selina Gomez</p>
             <p className="mt-2 text-gray-600 max-w-xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id
-              felis ultricies quam vel dui sollicitudin aliquet ut arcu. Nam
-              vitae ex enim, sed sapien egestas ac non arcu. Testique ultricies
-              dolor aliquam lacus volutpat praesent.
+              "The best shopping experience I have ever had! The customer
+              service is outstanding, and the quality of the products is
+              top-notch. I highly recommend this ecommerce site to everyone."
             </p>
           </div>
         </section>

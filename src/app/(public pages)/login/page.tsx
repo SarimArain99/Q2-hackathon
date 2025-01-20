@@ -14,17 +14,13 @@ function Page() {
   return (
     <div>
       <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold py-5">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold py-5 text-[#0D0E43]">
           My Account
         </h2>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Components</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>

@@ -1,175 +1,89 @@
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 
-function TopProducts() {
+interface Product {
+  _id: string;
+  name: string;
+  code: string;
+  price: number;
+  image: {
+    asset: {
+      _ref: string;
+    };
+  };
+}
+
+async function Treandy() {
+  const data = await client.fetch(`*[_type == "product"]`);
+
   return (
     <div>
-      <h1 className="text-[#151875] text-[42px] font-bold text-center my-5">
-        Trending Products
+      <h1 className="text-[#1A0B5B] text-[42px] font-bold text-center py-5">
+        Top Products
       </h1>
-      <div className="flex items-center justify-center">
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 p-4">
-          <div className="h-[361px] max-w-[270px] shadow-xl shadow-gray-400 overflow-hidden">
-            <div className="h-[60%]">
-              <Image
-                src="/chair4.png"
-                alt="Cantilever Chair"
-                width={1000}
-                height={1000}
-                className="h-full w-full bg-[#F6F7FB]"
-              />
-            </div>
-            <div className="flex flex-col items-center gap-3 h-[40%] mt-5">
-              <h2 className="text-[#FB2E86] text-[18px] font-bold">
-                Cantilever Chair
-              </h2>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
+      <div className="flex justify-center">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-3">
+          {data.slice(14, 17).map((product: Product) => (
+            <Link href={`/shop/${product._id}`}
+              key={product._id}
+              className={`h-[370px] w-[270px] shadow-lg shadow-gray-400 overflow-hidden mx-auto group hover:bg-[#151875] transition-colors duration-300`}
+            >
+              <div className="relative h-[60%]">
+                <Image
+                  src="/blueCart.png"
+                  alt="Add to Cart"
+                  width={1000}
+                  height={1000}
+                  className="h-6 w-6 hidden group-hover:block  absolute top-1 left-2 transition-all duration-500"
+                />
+                <Image
+                  src="/lovee.png"
+                  alt="Favorite"
+                  width={1000}
+                  height={1000}
+                  className="h-5 w-5 hidden group-hover:block absolute top-2 left-8 transition-all duration-500"
+                />
+                <Image
+                  src="/zoom.png"
+                  alt="Zoom"
+                  width={1000}
+                  height={1000}
+                  className="h-5 w-5 hidden group-hover:block absolute top-2 left-14 transition-all duration-500"
+                />
+                <Image
+                  src={urlFor(product.image.asset._ref).url()}
+                  alt={product.name}
+                  width={1000}
+                  height={1000}
+                  className="h-full w-full bg-[#F6F7FB]"
+                />
               </div>
-            </div>
-          </div>
-          <div className="h-[361px] max-w-[270px] shadow-xl shadow-gray-400 overflow-hidden">
-            <div className="h-[60%]">
-              <Image
-                src="/chair5.png"
-                alt="Cantilever Chair"
-                width={1000}
-                height={1000}
-                className="h-full w-full bg-[#F6F7FB]"
-              />
-            </div>
-            <div className="flex flex-col items-center gap-3 h-[40%] mt-5">
-              <h2 className="text-[#FB2E86] text-[18px] font-bold">
-                Cantilever Chair
-              </h2>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
+              <div className="flex flex-col items-center gap-3 h-[40%] mt-5">
+                <h2
+                  className={`text-[18px] px-2 text-center font-bold text-[#FB2E86] group-hover:text-white transition-colors duration-300 line-clamp-1`}
+                >
+                  {product.name}
+                </h2>
+
+                <div className="flex gap-3">
+                  <div className="bg-blue-300 h-[3px] w-[15px]"></div>
+                  <div className="bg-red-600 h-[3px] w-[15px]"></div>
+                  <div className="bg-blue-700 h-[3px] w-[15px]"></div>
+                </div>
+                <p
+                  className={`text-[14px] text-[#151875] group-hover:text-white transition-colors duration-300`}
+                >
+                  ${product.price}
+                </p>
               </div>
-            </div>
-          </div>
-          <div className="h-[361px] max-w-[270px] shadow-xl shadow-gray-400 overflow-hidden">
-            <div className="h-[60%]">
-              <Image
-                src="/chair6.png"
-                alt="Cantilever Chair"
-                width={1000}
-                height={1000}
-                className="h-full w-full bg-[#F6F7FB]"
-              />
-            </div>
-            <div className="flex flex-col items-center gap-3 h-[40%] mt-5">
-              <h2 className="text-[#FB2E86] text-[18px] font-bold">
-                Cantilever Chair
-              </h2>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
-              </div>
-            </div>
-          </div>
-          <div className="h-[361px] max-w-[270px] shadow-xl shadow-gray-400 overflow-hidden">
-            <div className="h-[60%]">
-              <Image
-                src="/chair7.png"
-                alt="Cantilever Chair"
-                width={1000}
-                height={1000}
-                className="h-full w-full bg-[#F6F7FB]"
-              />
-            </div>
-            <div className="flex flex-col items-center gap-3 h-[40%] mt-5">
-              <h2 className="text-[#FB2E86] text-[18px] font-bold">
-                Cantilever Chair
-              </h2>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex mt-5 justify-center items-center">
-        <div  className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-          <div className="bg-[#FFF6FB] p-5">
-            <h2 className="text-[#151875] text-[26px] font-semibold">
-              23% off in all products
-            </h2>
-            <p className="text-[#FB2E86] text-[16px] underline">Shop Now</p>
-            <div className="flex justify-end">
-              <Image
-                src="/clock.png"
-                alt="Clock"
-                width={1000}
-                height={1000}
-                className="h-48 w-44"
-              />
-            </div>
-          </div>
-          <div className="bg-[#EEEFFB] p-5">
-            <h2 className="text-[#151875] text-[26px] font-semibold">
-              23% off in all products
-            </h2>
-            <p className="text-[#FB2E86] text-[16px] underline">
-              View Collection
-            </p>
-            <div className="flex justify-end">
-              <Image
-                src="/cupboard.png"
-                alt="Clock"
-                width={1000}
-                height={1000}
-                className="h-48 w-60"
-              />
-            </div>
-          </div>
-          <div>
-            <div className="flex justify-center items-center">
-              <Image
-                src="/chair5.png"
-                alt=""
-                width={1000}
-                height={1000}
-                className="h-20 w-20"
-              />
-              <span>
-                <p>Executive Seat chair</p>
-                <p>$32.00</p>
-              </span>
-            </div>
-            <div className="flex justify-center items-center">
-              <Image
-                src="/chair4.png"
-                alt=""
-                width={1000}
-                height={1000}
-                className="h-20 w-20"
-              />
-              <span>
-                <p>Executive Seat chair</p>
-                <p>$32.00</p>
-              </span>
-            </div>
-            <div className="flex justify-center items-center">
-              <Image
-                src="/chair6.png"
-                alt=""
-                width={1000}
-                height={1000}
-                className="h-20 w-20"
-              />
-              <span>
-                <p>Executive Seat chair</p>
-                <p>$32.00</p>
-              </span>
-            </div>
-          </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-export default TopProducts;
+export default Treandy;

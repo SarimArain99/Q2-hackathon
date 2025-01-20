@@ -1,165 +1,85 @@
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 
-function Latest() {
+interface Product {
+  _id: string;
+  name: string;
+  code: string;
+  price: number;
+  image: {
+    asset: {
+      _ref: string;
+    };
+  };
+}
+
+async function Latest() {
+  const data = await client.fetch(`*[_type == "product"]`);
+
   return (
     <div>
-      <h1 className="text-[#151875] text-[52px] font-bold text-center my-5">
+      <h1 className="text-[#1A0B5B] text-[42px] font-bold text-center py-5">
         Latest Products
       </h1>
       <div className="flex justify-center">
-      <div className="grid lg:grid-cols-4 grid-cols-2 text-[#151875] gap-10 text-xl font-bold  mb-5">
-        <p className="text-[#FB4997] border-b-4 border-[#FB4997] ">
-          New Arrival
-        </p>
-        <p>Best Seller</p>
-        <p>Featured</p>
-        <p>Special Offer</p>
-      </div>
-      </div>
-      <div className="flex flex-wrap justify-center gap-4 p-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <div className="w-full sm:w-[320px] md:w-[280px] lg:w-[330px] h-[269px] flex flex-col">
-            <div className="overflow-hidden">
-              <Image
-                src="/woodChair.png"
-                alt="Comfort Handy Craft"
-                width={1000}
-                height={1000}
-                className=" bg-[#F7F7F7] h-full object-contain"
-              />
-            </div>
-            <div className="h-[20%] flex justify-between items-center">
-              <p>Comfort Handy Craft</p>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-3">
+          {data.slice(3,9).map((product: Product) => (
+            <Link href={`/shop/${product._id}`}
+              key={product._id}
+              className={`h-[360px] w-[270px] shadow-xl shadow-gray-400 overflow-hidden mx-auto group hover:bg-[#151875] transition-colors duration-300`}
+            >
+              <div className="relative h-[60%]">
+                <Image
+                  src="/blueCart.png"
+                  alt="Add to Cart"
+                  width={1000}
+                  height={1000}
+                  className="h-6 w-6 hidden group-hover:block absolute top-1 left-2 transition-all duration-500"
+                />
+                <Image
+                  src="/lovee.png"
+                  alt="Favorite"
+                  width={1000}
+                  height={1000}
+                  className="h-5 w-5 hidden group-hover:block absolute top-2 left-8 transition-all duration-500"
+                />
+                <Image
+                  src="/zoom.png"
+                  alt="Zoom"
+                  width={1000}
+                  height={1000}
+                  className="h-5 w-5 hidden group-hover:block absolute top-2 left-14 transition-all duration-500"
+                />
+                <Image
+                  src={urlFor(product.image.asset._ref).url()}
+                  alt={product.name}
+                  width={1000}
+                  height={1000}
+                  className="h-full w-full bg-[#F6F7FB] object-contain"
+                />
               </div>
-            </div>
-          </div>
+              <div className="flex flex-col items-center gap-3 h-[40%] mt-5">
+                <h2
+                  className={`text-[18px] px-2 text-center font-bold text-[#FB2E86] group-hover:text-white transition-colors duration-300 line-clamp-1`}
+                >
+                  {product.name}
+                </h2>
 
-          <div className="w-full sm:w-[320px] md:w-[280px] lg:w-[330px] h-[269px] flex flex-col">
-            <div className=" overflow-hidden relative">
-              <Image
-                src="/sale.png"
-                alt=""
-                width={1000}
-                height={1000}
-                className="h-16 w-16 absolute top-2 left-2"
-              />
-              <Image
-                src="/blueCard.png"
-                alt=""
-                width={1000}
-                height={1000}
-                className="h-6 w-5 absolute left-2 bottom-2"
-              />
-              <Image
-                src="/love.png"
-                alt=""
-                width={1000}
-                height={1000}
-                className="h-5 w-5 absolute left-2 bottom-8"
-              />
-              <Image
-                src="/zoom.png"
-                alt=""
-                width={1000}
-                height={1000}
-                className="h-5 w-5 absolute left-2 bottom-14"
-              />
-              <Image
-                src="/chair6.png"
-                alt="Comfort Handy Craft"
-                width={1000}
-                height={1000}
-                className="w-full object-contain h-full"
-              />
-            </div>
-            <div className="h-[20%] flex justify-between items-center">
-              <p>Comfort Handy Craft</p>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
+                <div className="flex gap-3">
+                  <div className="bg-blue-300 h-[3px] w-[15px]"></div>
+                  <div className="bg-red-600 h-[3px] w-[15px]"></div>
+                  <div className="bg-blue-700 h-[3px] w-[15px]"></div>
+                </div>
+                <p
+                  className={`text-[14px] text-[#151875] group-hover:text-white transition-colors duration-300`}
+                >
+                  ${product.price}
+                </p>
               </div>
-            </div>
-          </div>
-
-          <div className="w-full sm:w-[320px] md:w-[280px] lg:w-[330px] h-[269px] flex flex-col">
-            <div className=" overflow-hidden">
-              <Image
-                src="/chair5.png"
-                alt="Comfort Handy Craft"
-                width={1000}
-                height={1000}
-                className=" bg-[#F7F7F7] object-contain h-full"
-              />
-            </div>
-            <div className="h-[20%] flex justify-between items-center">
-              <p>Comfort Handy Craft</p>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-full sm:w-[320px] md:w-[280px] lg:w-[330px] h-[269px] flex flex-col">
-            <div className=" overflow-hidden">
-              <Image
-                src="/chair4.png"
-                alt="Comfort Handy Craft"
-                width={1000}
-                height={1000}
-                className="w-full bg-[#F7F7F7] object-contain h-full"
-              />
-            </div>
-            <div className="h-[20%] flex justify-between items-center">
-              <p>Comfort Handy Craft</p>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-full sm:w-[320px] md:w-[280px] lg:w-[330px] h-[269px] flex flex-col">
-            <div className=" overflow-hidden">
-              <Image
-                src="/chair3.png"
-                alt="Comfort Handy Craft"
-                width={1000}
-                height={1000}
-                className="w-full bg-[#F7F7F7] object-contain h-full"
-              />
-            </div>
-            <div className="h-[20%] flex justify-between items-center">
-              <p>Comfort Handy Craft</p>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-full sm:w-[320px] md:w-[280px] lg:w-[330px] h-[269px] flex flex-col">
-            <div className=" overflow-hidden">
-              <Image
-                src="/chair1.png"
-                alt="Comfort Handy Craft"
-                width={1000}
-                height={1000}
-                className="w-full bg-[#F7F7F7] object-contain h-full"
-              />
-            </div>
-            <div className="h-[20%] flex justify-between items-center">
-              <p>Comfort Handy Craft</p>
-              <div className="flex gap-1 items-center">
-                <p className="text-xl">$42.00</p>
-                <p className="line-through text-[#FB2448] text-sm">$65.00</p>
-              </div>
-            </div>
-          </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
