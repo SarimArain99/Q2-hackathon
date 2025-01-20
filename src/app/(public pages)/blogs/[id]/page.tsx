@@ -51,17 +51,17 @@ const BlogDetails: React.FC = () => {
         </Breadcrumb>
       </div>
 
-      <div className="container mx-auto px-4 py-10">
-        <article className="overflow-hidden flex flex-col lg:flex-row items-center">
+      <div className="py-10">
+        <article className="flex flex-col lg:flex-row">
           <Image
             src={blog.image}
             alt={blog.title}
-            className="w-[50%] h-auto mb-4 rounded-t-lg object-cover"
+            className="px-2 h-auto mb-4 rounded-t-lg object-cover"
             width={1000}
             height={1000}
             priority={true}
           />
-          <div className="p-6 max-w-[50%]">
+          <div className="px-2 md:p-6 lg:max-w-[50%]">
             <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold mb-4 text-[#101750]">
               {blog.title}
             </h1>

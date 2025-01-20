@@ -6,20 +6,20 @@ function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-[#EEEFFB] px-10 py-16 text-[#8A8FB9]">
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-10">
-        <div className="flex flex-col gap-6">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-10 items-center">
+        <div className="flex flex-col gap-5 items-center">
           <h2 className="text-4xl font-bold text-black text-start">Hekto</h2>
-          <div className="flex items-center bg-white rounded-md shadow-md overflow-hidden">
+          <div className="flex items-center bg-white rounded-md shadow-md overflow-hidden sm:w-64 lg:w-full">
             <input
               type="text"
               placeholder="Enter Email Address"
-              className="flex-1 px-2 py-2 text-sm text-gray-800 bg-transparent outline-none placeholder-gray-500"
+              className="flex-1 h-full px-2 text-sm text-gray-800 bg-transparent outline-none placeholder-gray-500"
             />
-            <button className="bg-[#FB2E86] text-white text-sm font-medium px-2 py-2 hover:bg-[#ff4d9c] transition">
-              Sign Up
+            <button className="bg-[#FB2E86] px-2 lg:px-0 text-white text-xs h-full font-medium py-2 hover:bg-[#ff4d9c] ">
+              Sign-Up
             </button>
           </div>
-          <p className="text-[16px] leading-relaxed">
+          <p className="text-[16px] leading-relaxed w-64 lg:w-full">
             Contact Info:
             <br /> 123 Maple Street, London, Greater London NW1 8JR, UK
           </p>
