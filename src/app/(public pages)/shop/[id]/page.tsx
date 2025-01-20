@@ -27,7 +27,6 @@ interface Product {
 }
 
 export default function ProductPage() {
-  const router = useRouter();
   const { query } = useRouter();
   const id = query?.id as string; // Retrieve `id` dynamically from the query string.
 
