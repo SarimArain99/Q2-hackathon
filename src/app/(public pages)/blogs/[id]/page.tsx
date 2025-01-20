@@ -1,6 +1,7 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
-import blogs from "@/components/blogs";
+import blogs from "@/components/blogs"; // Replace with the actual path to your blogs array
 import Image from "next/image";
 import BlogShimmer from "@/components/BlogDetailShimmer";
 import {
@@ -22,12 +23,10 @@ interface Blog {
 }
 
 interface BlogDetailsProps {
-  params: {
-    id: string;
-  };
+  params: { id: string };
 }
 
-const BlogDetails: React.FC<BlogDetailsProps> = ({ params }) => {
+const BlogDetails: React.FC<BlogDetailsProps> = ({ params }: BlogDetailsProps) => {
   const { id } = params;
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
@@ -39,7 +38,7 @@ const BlogDetails: React.FC<BlogDetailsProps> = ({ params }) => {
       setLoading(false);
     };
 
-    const timeoutId = setTimeout(fetchBlog, 1000);
+    const timeoutId = setTimeout(fetchBlog, 1000); // Simulate 1-second loading
     return () => clearTimeout(timeoutId);
   }, [id]);
 
@@ -58,6 +57,7 @@ const BlogDetails: React.FC<BlogDetailsProps> = ({ params }) => {
 
   return (
     <div className="text-[#101750]">
+      {/* Header */}
       <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold py-5 text-[#101750]">
           {blog.title}
@@ -79,8 +79,10 @@ const BlogDetails: React.FC<BlogDetailsProps> = ({ params }) => {
         </Breadcrumb>
       </div>
 
+      {/* Blog Content */}
       <div className="container mx-auto px-4 py-10">
         <article className="overflow-hidden flex flex-col lg:flex-row items-center">
+          {/* Blog Image */}
           <Image
             src={blog.image}
             alt={blog.title}
