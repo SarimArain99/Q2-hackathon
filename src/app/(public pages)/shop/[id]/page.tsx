@@ -7,7 +7,7 @@ import { urlFor } from "@/sanity/lib/image";
 import SuggestionsComponent from "@/components/Suggestions";
 import React, { useEffect, useState } from "react";
 import DetailShimmer from "@/components/DetailShimmer";
-import { useParams, useRouter } from "next/navigation"; // Correct import for App Router
+import { useParams, useRouter } from "next/navigation";
 
 interface Product {
   _id: string;
@@ -26,47 +26,41 @@ interface Product {
 }
 
 export default function ProductPage() {
-  const { id } = useParams(); // Retrieve the `id` from the dynamic route segment
+  const { id } = useParams(); // Get the product ID from the URL parameters
   const router = useRouter(); // For programmatic navigation
 
-  const { addToCart, addToWishlist } = useShop();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { addToCart, addToWishlist } = useShop(); // Get methods for cart and wishlist
+  const [product, setProduct] = useState<Product | null>(null); // State to hold the product data
+  const [loading, setLoading] = useState(true); // State to track loading
 
+  // Fetch the product when the component mounts
   useEffect(() => {
-    if (!id) {
-      console.warn("No ID found in route parameters");
-      setLoading(false);
-      return;
-    }
+    const fetchProduct = async () => {
+      if (!id) return; // If there is no ID, return early
 
-    console.log("Fetching product with ID:", id);
+      try {
+        // Fetch product data from Sanity using the product ID
+        const data = await client.fetch(
+          `*[_type == "product" && _id == $id][0]`,
+          { id }
+        );
 
-    // Make sure Sanity client is properly configured and the API URL is reachable
-    const sanityQuery = `*[_type == "product" && _id == $id][0]`;
-    client
-      .fetch(sanityQuery, { id })
-      .then((data) => {
-        if (data) {
-          console.log("Fetched product data:", data);
-          setProduct(data);
-        } else {
-          console.error("Product not found for ID:", id);
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch product data:", err);
-        setLoading(false);
-      });
-  }, [id]);
+        // Set the product data in the state
+        setProduct(data || null);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false); // Set loading to false once the fetch is complete
+      }
+    };
 
-  // Loading state (show shimmer)
-  if (loading) {
-    return <DetailShimmer />;
-  }
+    fetchProduct(); // Call the async function
+  }, [id]); // Run the effect when the ID changes
 
-  // Fallback for when product data is not found
+  // Show a shimmer while the product is loading
+  if (loading) return <DetailShimmer />;
+
+  // Show a fallback message if no product is found
   if (!product) {
     return (
       <div className="text-center text-gray-500 py-10">
@@ -76,6 +70,7 @@ export default function ProductPage() {
     );
   }
 
+  // Calculate discounted price if there is a discount
   const discountedPrice =
     product.discountPercentage > 0
       ? (product.price * (100 - product.discountPercentage)) / 100
@@ -127,8 +122,8 @@ export default function ProductPage() {
           <div className="flex gap-4 mt-6 flex-col sm:flex-row items-center">
             <button
               onClick={() => {
-                addToCart(product);
-                router.push("/cart"); // Programmatically navigate to the cart page
+                addToCart(product); // Add product to cart
+                router.push("/cart"); // Navigate to the cart page
               }}
               className="w-44 sm:w-auto bg-[#151875] text-white px-6 py-2 rounded-lg hover:bg-[#232975] transition"
             >
@@ -136,8 +131,8 @@ export default function ProductPage() {
             </button>
             <button
               onClick={() => {
-                addToWishlist(product);
-                router.push("/wishlist"); // Programmatically navigate to the wishlist page
+                addToWishlist(product); // Add product to wishlist
+                router.push("/wishlist"); // Navigate to the wishlist page
               }}
               className="w-44 sm:w-auto bg-[#fb2e86] text-white px-6 py-2 rounded-lg hover:bg-[#e73b86] transition"
             >
