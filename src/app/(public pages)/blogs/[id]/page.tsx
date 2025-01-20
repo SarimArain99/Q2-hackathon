@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import blogs from "@/components/blogs"; // Replace with the actual path to your blogs array
+import blogs from "@/components/blogs";
 import Image from "next/image";
 import BlogShimmer from "@/components/BlogDetailShimmer";
 import {
@@ -22,30 +22,35 @@ interface Blog {
   author: string;
 }
 
+// Type definition for BlogDetails props
 interface BlogDetailsProps {
-  params: { id: string };
+  params: { id: string }; // Explicitly defining `params` as an object with an `id` key
 }
 
-const BlogDetails: React.FC<BlogDetailsProps> = ({ params }: BlogDetailsProps) => {
-  const { id } = params;
-  const [blog, setBlog] = useState<Blog | null>(null);
-  const [loading, setLoading] = useState(true);
+// Functional component definition
+const BlogDetails: React.FC<BlogDetailsProps> = ({ params }) => {
+  const { id } = params; // Extract `id` from `params`
+  const [blog, setBlog] = useState<Blog | null>(null); // State to store the fetched blog
+  const [loading, setLoading] = useState(true); // State to handle loading state
 
+  // Simulate fetching the blog on mount
   useEffect(() => {
     const fetchBlog = () => {
-      const foundBlog = blogs.find((blog) => blog.id === Number(id));
-      setBlog(foundBlog || null);
-      setLoading(false);
+      const foundBlog = blogs.find((blog) => blog.id === Number(id)); // Find the blog by ID
+      setBlog(foundBlog || null); // Set the blog or null if not found
+      setLoading(false); // Stop loading
     };
 
-    const timeoutId = setTimeout(fetchBlog, 1000); // Simulate 1-second loading
-    return () => clearTimeout(timeoutId);
+    const timeoutId = setTimeout(fetchBlog, 1000); // Simulate a 1-second delay
+    return () => clearTimeout(timeoutId); // Cleanup timeout on unmount
   }, [id]);
 
+  // Render loading state
   if (loading) {
     return <BlogShimmer />;
   }
 
+  // Render "Blog Not Found" state
   if (!blog) {
     return (
       <div className="text-center text-gray-500 py-10">
@@ -55,6 +60,7 @@ const BlogDetails: React.FC<BlogDetailsProps> = ({ params }: BlogDetailsProps) =
     );
   }
 
+  // Render blog details
   return (
     <div className="text-[#101750]">
       {/* Header */}
