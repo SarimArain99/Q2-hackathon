@@ -1,7 +1,9 @@
+"use client"
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 interface Product {
   _id: string;
@@ -13,22 +15,62 @@ interface Product {
       _ref: string;
     };
   };
+  category: string;
 }
 
 async function Featured() {
   const data = await client.fetch(`*[_type == "product"]`);
 
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [cart, setCart] = useState<Product[]>([]);
+  const [wishlist, setWishlist] = useState<Product[]>([]);
+
+  const filteredData = data.filter((product: Product) => {
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const addToCart = (product: Product) => {
+    setCart((prevCart) => [...prevCart, product]);
+  };
+
+  const addToWishlist = (product: Product) => {
+    setWishlist((prevWishlist) => [...prevWishlist, product]);
+  };
+
   return (
     <div>
-      <h1 className="text-[#1A0B5B] text-[42px] font-bold text-center py-5">
-        Featured Products
-      </h1>
+      <h1 className="text-[#1A0B5B] text-[42px] font-bold text-center py-5">Featured Products</h1>
+
+      <div className="flex justify-center gap-5 py-5">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="p-2 border border-gray-300 rounded"
+        />
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="p-2 border border-gray-300 rounded"
+        >
+          <option value="all">All Categories</option>
+          <option value="Chair">Chair</option>
+          <option value="Sofa">Sofa</option>
+          <option value="Table">Table</option>
+        </select>
+      </div>
+
       <div className="flex justify-center">
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-3">
-          {data.slice(0, 3).map((product: Product) => (
-            <Link href={`/shop/${product._id}`}
+          {filteredData.slice(0, 3).map((product: Product) => (
+            <Link
+              href={`/shop/${product._id}`}
               key={product._id}
-              className={`h-[360px] w-[270px] shadow-lg shadow-gray-400 overflow-hidden mx-auto group hover:bg-[#151875] duration-700`}
+              className="h-[360px] w-[270px] shadow-lg shadow-gray-400 overflow-hidden mx-auto group hover:bg-[#151875] duration-700"
             >
               <div className="relative h-[60%]">
                 <Image
@@ -37,6 +79,10 @@ async function Featured() {
                   width={1000}
                   height={1000}
                   className="h-6 w-6 hidden group-hover:block absolute top-1 left-2 duration-500"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addToCart(product); // Prevent Link navigation when adding to cart
+                  }}
                 />
                 <Image
                   src="/lovee.png"
@@ -44,6 +90,10 @@ async function Featured() {
                   width={1000}
                   height={1000}
                   className="h-5 w-5 hidden group-hover:block absolute top-2 left-8 duration-500"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addToWishlist(product); // Prevent Link navigation when adding to wishlist
+                  }}
                 />
                 <Image
                   src="/zoom.png"
