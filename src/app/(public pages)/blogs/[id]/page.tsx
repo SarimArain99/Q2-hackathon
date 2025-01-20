@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useParams } from "next/navigation";
 import blogs from "@/components/blogs";
 import Image from "next/image";
 import BlogShimmer from "@/components/BlogDetailShimmer";
@@ -13,23 +14,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-// interface Blog {
-//   id: number;
-//   title: string;
-//   image: string;
-//   description: string;
-//   blog: string;
-//   author: string;
-// }
-
-interface BlogDetailsProps {
-  params: { id: string };
-}
-
 // Functional component definition
-const BlogDetails: React.FC<BlogDetailsProps> = ({ params }) => {
-  const { id } = params;
-
+const BlogDetails: React.FC = () => {
+  const { id } = useParams(); // Retrieve `id` from the URL parameters
   // Fetch the blog directly using the `id`
   const blog = blogs.find((blog) => blog.id === Number(id));
 
@@ -48,6 +35,7 @@ const BlogDetails: React.FC<BlogDetailsProps> = ({ params }) => {
     <BlogShimmer />
   ) : (
     <div className="text-[#101750]">
+      {/* Header */}
       <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold py-5 text-[#101750]">
           {blog.title}
