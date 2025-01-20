@@ -6,9 +6,8 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import SuggestionsComponent from "@/components/Suggestions";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import DetailShimmer from "@/components/DetailShimmer";
-import { useRouter } from "next/router";
+import { useParams, useRouter } from "next/navigation"; // Correct import for App Router
 
 interface Product {
   _id: string;
@@ -27,8 +26,8 @@ interface Product {
 }
 
 export default function ProductPage() {
-  const { query } = useRouter();
-  const id = query?.id as string; // Retrieve `id` dynamically from the query string.
+  const { id } = useParams(); // Retrieve the `id` from the dynamic route segment
+  const router = useRouter(); // For programmatic navigation
 
   const { addToCart, addToWishlist } = useShop();
   const [product, setProduct] = useState<Product | null>(null);
@@ -37,9 +36,7 @@ export default function ProductPage() {
     if (id) {
       client
         .fetch(`*[_type == "product" && _id == $id][0]`, { id })
-        .then((data) => {
-          setProduct(data);
-        });
+        .then((data) => setProduct(data));
     }
   }, [id]);
 
@@ -92,16 +89,22 @@ export default function ProductPage() {
           <p className="text-gray-700">{product.description}</p>
           <div className="flex gap-4 mt-6 flex-col sm:flex-row items-center">
             <button
-              onClick={() => addToCart(product)}
+              onClick={() => {
+                addToCart(product);
+                router.push("/cart"); // Programmatically navigate to the cart page
+              }}
               className="w-44 sm:w-auto bg-[#151875] text-white px-6 py-2 rounded-lg hover:bg-[#232975] transition"
             >
-              <Link href="/cart">Add to Cart</Link>
+              Add to Cart
             </button>
             <button
-              onClick={() => addToWishlist(product)}
+              onClick={() => {
+                addToWishlist(product);
+                router.push("/wishlist"); // Programmatically navigate to the wishlist page
+              }}
               className="w-44 sm:w-auto bg-[#fb2e86] text-white px-6 py-2 rounded-lg hover:bg-[#e73b86] transition"
             >
-              <Link href="/wishlist">Add to Favorites</Link>
+              Add to Favorites
             </button>
           </div>
         </div>

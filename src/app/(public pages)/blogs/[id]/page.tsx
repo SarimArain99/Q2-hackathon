@@ -14,13 +14,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-// Functional component definition
 const BlogDetails: React.FC = () => {
-  const { id } = useParams(); // Retrieve `id` from the URL parameters
-  // Fetch the blog directly using the `id`
+  const { id } = useParams();
   const blog = blogs.find((blog) => blog.id === Number(id));
-
-  // Handle case where the blog is not found
   if (!blog) {
     return (
       <div className="text-center text-gray-500 py-10">
@@ -30,12 +26,10 @@ const BlogDetails: React.FC = () => {
     );
   }
 
-  // Render blog details
   return !blog ? (
     <BlogShimmer />
   ) : (
     <div className="text-[#101750]">
-      {/* Header */}
       <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
         <h2 className="text-xl sm:text-3xl md:text-4xl font-bold py-5 text-[#101750]">
           {blog.title}
@@ -57,10 +51,8 @@ const BlogDetails: React.FC = () => {
         </Breadcrumb>
       </div>
 
-      {/* Blog Content */}
       <div className="container mx-auto px-4 py-10">
         <article className="overflow-hidden flex flex-col lg:flex-row items-center">
-          {/* Blog Image */}
           <Image
             src={blog.image}
             alt={blog.title}
