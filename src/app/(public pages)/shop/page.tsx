@@ -1,14 +1,4 @@
-"use client";
-
-import ProductShimmer from "@/components/ProductShimmer";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+"use client"
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
@@ -25,37 +15,27 @@ interface Product {
       _ref: string;
     };
   };
-  category: string;
+  category: string; // Assuming category is part of the product data
 }
 
-const Shop = () => {
+async function fetchFeaturedProducts() {
+  const data = await client.fetch(`*[_type == "product"]`);
+  return data;
+}
+
+const Featured = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [loading, setLoading] = useState<boolean>(true); // Add loading state
 
   useEffect(() => {
-    fetchProducts();
+    fetchFeaturedProducts().then((data) => {
+      setProducts(data);
+      setFilteredProducts(data.slice(0, 3)); // Show only the top 3 products initially
+    });
   }, []);
 
-  const fetchProducts = () => {
-    setLoading(true); // Set loading to true while fetching
-    client
-      .fetch(`*[_type == "product"]`) // Sanity query for all products
-      .then((data) => {
-        console.log("Fetched products:", data); // Log fetched data for debugging
-        setProducts(data);
-        setFilteredProducts(data);
-        setLoading(false); // Set loading to false when data is fetched
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error); // Log any errors
-        setLoading(false); // Ensure loading is false even on error
-      });
-  };
-
-  // Handle filtering products based on search query and selected category
   useEffect(() => {
     let updatedProducts = products;
 
@@ -71,27 +51,14 @@ const Shop = () => {
       );
     }
 
-    setFilteredProducts(updatedProducts);
+    setFilteredProducts(updatedProducts.slice(0, 3)); // Apply filters and show top 3 results
   }, [searchQuery, selectedCategory, products]);
 
   return (
-    <div className="min-h-screen mb-5">
-      <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold py-5 text-[#0D0E43]">
-          Shop
-        </h2>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Shop</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
+    <div>
+      <h1 className="text-[#1A0B5B] text-[42px] font-bold text-center py-5">
+        Featured Products
+      </h1>
 
       {/* Search and Category Filter */}
       <div className="bg-white p-6 flex flex-col md:flex-row justify-between items-center mt-5">
@@ -133,81 +100,73 @@ const Shop = () => {
         </div>
       </div>
 
-      {/* Loading State or Product Display */}
-      {loading ? (
-        <div>
-          <ProductShimmer />
-        </div>
-      ) : (
-        <div className="flex justify-center">
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-3">
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product) => (
-                <Link
-                  href={`/shop/${product._id}`}
-                  key={product._id}
-                  className={`h-[360px] w-[270px] overflow-hidden mx-auto group hover:bg-[#151875] duration-700`}
-                >
-                  <div className="relative h-[60%]">
-                    <Image
-                      src="/blueCart.png"
-                      alt="Add to Cart"
-                      width={1000}
-                      height={1000}
-                      className="h-6 w-6 hidden group-hover:block absolute top-1 left-2 duration-500"
-                    />
-                    <Image
-                      src="/lovee.png"
-                      alt="Favorite"
-                      width={1000}
-                      height={1000}
-                      className="h-5 w-5 hidden group-hover:block absolute top-2 left-8 duration-500"
-                    />
-                    <Image
-                      src="/zoom.png"
-                      alt="Zoom"
-                      width={1000}
-                      height={1000}
-                      className="h-5 w-5 hidden group-hover:block absolute top-2 left-14 duration-500"
-                    />
-                    <Image
-                      src={urlFor(product.image.asset._ref).url()}
-                      alt={product.name}
-                      width={1000}
-                      height={1000}
-                      className="h-full w-full bg-[#F6F7FB]"
-                    />
-                  </div>
-                  <div className="flex flex-col items-center gap-3 h-[40%] mt-5">
-                    <h2
-                      className={`text-[18px] px-2 text-center font-bold text-[#FB2E86] group-hover:text-white transition-colors duration-300 line-clamp-1`}
-                    >
-                      {product.name}
-                    </h2>
+      {/* Featured Products Grid */}
+      <div className="flex justify-center">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-3">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product: Product) => (
+              <Link
+                href={`/shop/${product._id}`}
+                key={product._id}
+                className={`h-[360px] w-[270px] shadow-lg shadow-gray-400 overflow-hidden mx-auto group hover:bg-[#151875] duration-700`}
+              >
+                <div className="relative h-[60%]">
+                  <Image
+                    src="/blueCart.png"
+                    alt="Add to Cart"
+                    width={1000}
+                    height={1000}
+                    className="h-6 w-6 hidden group-hover:block absolute top-1 left-2 duration-500"
+                  />
+                  <Image
+                    src="/lovee.png"
+                    alt="Favorite"
+                    width={1000}
+                    height={1000}
+                    className="h-5 w-5 hidden group-hover:block absolute top-2 left-8 duration-500"
+                  />
+                  <Image
+                    src="/zoom.png"
+                    alt="Zoom"
+                    width={1000}
+                    height={1000}
+                    className="h-5 w-5 hidden group-hover:block absolute top-2 left-14 duration-500"
+                  />
+                  <Image
+                    src={urlFor(product.image.asset._ref).url()}
+                    alt={product.name}
+                    width={1000}
+                    height={1000}
+                    className="h-full w-full bg-[#F6F7FB]"
+                  />
+                </div>
+                <div className="flex flex-col items-center gap-3 h-[40%] mt-5">
+                  <h2
+                    className={`text-[18px] px-2 text-center font-bold text-[#FB2E86] group-hover:text-white transition-colors duration-300 line-clamp-1`}
+                  >
+                    {product.name}
+                  </h2>
 
-                    <div className="flex gap-3">
-                      <div className="bg-blue-300 h-[3px] w-[15px]"></div>
-                      <div className="bg-red-600 h-[3px] w-[15px]"></div>
-                      <div className="bg-blue-700 h-[3px] w-[15px]"></div>
-                    </div>
-                    <p
-                      className={`text-[14px] text-[#151875] group-hover:text-white duration-700`}
-                    >
-                      ${product.price}
-                    </p>
+                  <div className="flex gap-3">
+                    <div className="bg-blue-300 h-[3px] w-[15px]"></div>
+                    <div className="bg-red-600 h-[3px] w-[15px]"></div>
+                    <div className="bg-blue-700 h-[3px] w-[15px]"></div>
                   </div>
-                </Link>
-              ))
-            ) : (
-              <p className="text-gray-500 text-center mt-5">
-                No products found.
-              </p>
-            )}
-          </div>
+                  <p
+                    className={`text-[14px] text-[#151875] group-hover:text-white duration-700`}
+                  >
+                    ${product.price}
+                  </p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className="text-gray-500 text-center mt-5">No products found.</p>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
-export default Shop;
+export default Featured;
