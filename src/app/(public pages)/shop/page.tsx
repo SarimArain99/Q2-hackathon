@@ -35,6 +35,7 @@ function Shop() {
   const [cart, setCart] = useState<Product[]>([]);
   const [wishlist, setWishlist] = useState<Product[]>([]);
 
+  // Fetch products from Sanity
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true); // Start loading
@@ -45,6 +46,7 @@ function Shop() {
     fetchData();
   }, []);
 
+  // Filter products based on search and category
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name
       .toLowerCase()
@@ -54,10 +56,12 @@ function Shop() {
     return matchesSearch && matchesCategory;
   });
 
+  // Add to cart
   const addToCart = (product: Product) => {
     setCart((prevCart) => [...prevCart, product]);
   };
 
+  // Add to wishlist
   const addToWishlist = (product: Product) => {
     setWishlist((prevWishlist) => [...prevWishlist, product]);
   };
@@ -119,6 +123,22 @@ function Shop() {
         </div>
       </div>
 
+      {/* Cart and Wishlist Count */}
+      <div className="flex justify-end mt-5 px-4">
+        <div className="flex gap-5">
+          <Link href="/cart">
+            <span className="cursor-pointer text-xl">
+              Cart ({cart.length})
+            </span>
+          </Link>
+          <Link href="/wishlist">
+            <span className="cursor-pointer text-xl">
+              Wishlist ({wishlist.length})
+            </span>
+          </Link>
+        </div>
+      </div>
+
       {/* Product List */}
       <div className="flex justify-center">
         {loading ? (
@@ -126,8 +146,7 @@ function Shop() {
         ) : (
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-3">
             {filteredProducts.map((product: Product) => (
-              <Link
-                href={`/shop/${product._id}`}
+              <div
                 key={product._id}
                 className="h-[360px] w-[270px] shadow-lg shadow-gray-400 overflow-hidden mx-auto group hover:bg-[#151875] duration-700"
               >
@@ -138,7 +157,10 @@ function Shop() {
                     width={1000}
                     height={1000}
                     className="h-6 w-6 hidden group-hover:block absolute top-1 left-2 duration-500"
-                    onClick={() => addToCart(product)}
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent navigation
+                      addToCart(product);
+                    }}
                   />
                   <Image
                     src="/lovee.png"
@@ -146,7 +168,10 @@ function Shop() {
                     width={1000}
                     height={1000}
                     className="h-5 w-5 hidden group-hover:block absolute top-2 left-8 duration-500"
-                    onClick={() => addToWishlist(product)}
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent navigation
+                      addToWishlist(product);
+                    }}
                   />
                   <Image
                     src={urlFor(product.image.asset._ref).url()}
@@ -173,7 +198,7 @@ function Shop() {
                     ${product.price}
                   </p>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         )}
