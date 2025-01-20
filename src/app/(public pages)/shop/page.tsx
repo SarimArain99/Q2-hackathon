@@ -33,23 +33,29 @@ const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [loading, setLoading] = useState<boolean>(true); // Add loading state
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = () => {
+    setLoading(true); // Set loading to true while fetching
     client
-      .fetch(`*[_type == "product"]`)
+      .fetch(`*[_type == "product"]`) // Sanity query for all products
       .then((data) => {
+        console.log("Fetched products:", data); // Log fetched data for debugging
         setProducts(data);
         setFilteredProducts(data);
+        setLoading(false); // Set loading to false when data is fetched
       })
       .catch((error) => {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching products:", error); // Log any errors
+        setLoading(false); // Ensure loading is false even on error
       });
   };
 
+  // Handle filtering products based on search query and selected category
   useEffect(() => {
     let updatedProducts = products;
 
@@ -86,6 +92,8 @@ const Shop = () => {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
+
+      {/* Search and Category Filter */}
       <div className="bg-white p-6 flex flex-col md:flex-row justify-between items-center mt-5">
         <div className="mb-4 md:mb-0 flex items-center gap-2 w-full md:w-auto">
           <label
@@ -103,6 +111,7 @@ const Shop = () => {
             className="p-2 border border-gray-300 rounded w-full md:w-64 outline-[#FB2E86] duration-500"
           />
         </div>
+
         <div className="flex items-center w-full md:w-auto">
           <label
             htmlFor="filter"
@@ -124,7 +133,8 @@ const Shop = () => {
         </div>
       </div>
 
-      {products.length === 0 ? (
+      {/* Loading State or Product Display */}
+      {loading ? (
         <div>
           <ProductShimmer />
         </div>
