@@ -1,6 +1,6 @@
 const ProductShimmer = () => {
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
       {Array(6)
         .fill(null)
         .map((_, index) => (
