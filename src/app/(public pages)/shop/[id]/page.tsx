@@ -42,11 +42,13 @@ export default function ProductPage() {
 
     console.log("Fetching product with ID:", id);
 
+    // Make sure Sanity client is properly configured and the API URL is reachable
+    const sanityQuery = `*[_type == "product" && _id == $id][0]`;
     client
-      .fetch(`*[_type == "product" && _id == $id][0]`, { id })
+      .fetch(sanityQuery, { id })
       .then((data) => {
         if (data) {
-          console.log("Fetched product:", data);
+          console.log("Fetched product data:", data);
           setProduct(data);
         } else {
           console.error("Product not found for ID:", id);
@@ -54,19 +56,17 @@ export default function ProductPage() {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Failed to fetch product:", err);
+        console.error("Failed to fetch product data:", err);
         setLoading(false);
       });
   }, [id]);
 
+  // Loading state (show shimmer)
   if (loading) {
-    return (
-      <div>
-        <DetailShimmer />
-      </div>
-    );
+    return <DetailShimmer />;
   }
 
+  // Fallback for when product data is not found
   if (!product) {
     return (
       <div className="text-center text-gray-500 py-10">
@@ -120,9 +120,7 @@ export default function ProductPage() {
               ${discountedPrice}
             </p>
             {product.discountPercentage > 0 && (
-              <p className="text-gray-500 line-through">
-                ${product.price}
-              </p>
+              <p className="text-gray-500 line-through">${product.price}</p>
             )}
           </div>
           <p className="text-gray-700">{product.description}</p>
