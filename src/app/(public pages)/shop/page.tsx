@@ -68,7 +68,6 @@ function Shop() {
 
   return (
     <div className="mb-5">
-      {/* Header Section */}
       <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold py-5 text-[#0D0E43]">
           Shop
@@ -123,7 +122,6 @@ function Shop() {
         </div>
       </div>
 
-      {/* Cart and Wishlist Count */}
       <div className="flex justify-end mt-5 px-4">
         <div className="flex gap-5">
           <Link href="/cart">
@@ -139,14 +137,13 @@ function Shop() {
         </div>
       </div>
 
-      {/* Product List */}
       <div className="flex justify-center">
         {loading ? (
           <ProductShimmer />
         ) : (
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-3">
             {filteredProducts.map((product: Product) => (
-              <div
+              <Link href={`/shop/${product._id}`}
                 key={product._id}
                 className="h-[360px] w-[270px] shadow-lg shadow-gray-400 overflow-hidden mx-auto group hover:bg-[#151875] duration-700"
               >
@@ -198,7 +195,7 @@ function Shop() {
                     ${product.price}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}
