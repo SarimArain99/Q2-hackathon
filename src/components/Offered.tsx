@@ -49,7 +49,7 @@ function Offered() {
           <p className="text-[#151875] text-[22px] font-bold">24/7 Support</p>
           <p className="max-w-xs text-center text-[#1A0B5B4D]">
             Our team is available 24/7 to assist you with any queries or
-            concerns, ensuring you're always supported.
+            concerns, ensuring you&apos;re always supported.
           </p>
         </div>
 

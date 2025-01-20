@@ -127,9 +127,9 @@ function page() {
           <div className="flex flex-col justify-center items-center px-4">
             <p className="text-xl font-bold">Selina Gomez</p>
             <p className="mt-2 text-gray-600 max-w-xl">
-              "The best shopping experience I have ever had! The customer
+            &quot;The best shopping experience I have ever had! The customer
               service is outstanding, and the quality of the products is
-              top-notch. I highly recommend this ecommerce site to everyone."
+              top-notch. I highly recommend this ecommerce site to everyone.&quot;
             </p>
           </div>
         </section>

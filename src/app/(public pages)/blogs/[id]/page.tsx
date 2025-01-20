@@ -12,13 +12,21 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-function BlogDetails({ params }: any) {
+interface Blog {
+  id: number;
+  title: string;
+  image: string;
+  description: string;
+  blog: string;
+  author: string;
+}
+
+function BlogDetails({ params } : { params: { id: string } }) {
   const { id } = params;
-  const [blog, setBlog] = useState<any | null>(null);
+  const [blog, setBlog] = useState< Blog | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate fetching data with a delay
     const fetchBlog = () => {
       const foundBlog = blogs.find((blog) => blog.id === Number(id));
       setBlog(foundBlog || null);

@@ -26,7 +26,9 @@ function DiscountItem() {
             Eams Sofa Compact
           </p>
           <p className="text-[#B7BACB] text-[15px] md:text-[17px] max-w-full lg:max-w-[400px] mx-auto lg:mx-0">
-            Discover our wide range of high-quality furniture with a special 20% discount. Whether you're looking for a modern sofa or a classic wood chair, we have something for everyone.
+            Discover our wide range of high-quality furniture with a special 20%
+            discount. Whether you&apos;re looking for a modern sofa or a classic wood
+            chair, we have something for everyone.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
             <span className="flex items-center gap-3">
