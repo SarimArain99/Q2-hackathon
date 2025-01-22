@@ -1,0 +1,9 @@
+Test Case ID,Test Case Description,Test Steps,Expected Result,Actual Result,Column 1,Remarks:
+1,validation of product listing,checked product  lists ,data will be fetch ,all data feched,passed,no Issue
+2,if API not working,send request and till then shows skeloton,will be work properly,worked properly,passed,no issue
+3,checked staging,checked deployed staging product,all clear,all clear,passed,no issue
+4,dynamic routing in staging,checked product details page,all details will be fetched,fetched,passed,no issue
+5,cart and wishlist,added products,will be added,added,passed,no issue
+6,search & filter,searched and filtered products,will be search and filter,searched & filtered,passed,no issue
+7,blogs,feched on UI,will fetched on UI,fetched,passed,no issue
+8,deploed original website,created repo and deployed on vercel,will be deployed properly without error,deployed properly,passed,no issue

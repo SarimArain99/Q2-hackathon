@@ -19,7 +19,7 @@ function Promotional() {
         <p className="text-[#FB2E86] text-[14px] sm:text-[16px] font-bold">
           Best Furniture For Your Castle...
         </p>
-        <h2 className="text-[32px] sm:text-[40px] lg:text-[53px] font-bold leading-tight">
+        <h2 className="text-[32px] text-[#0D0E43] sm:text-[40px] lg:text-[53px] font-bold leading-tight">
           New Furniture Collection Trends in 2025
         </h2>
         <p className="text-[#8A8FB9] text-[14px] sm:text-[16px]">
