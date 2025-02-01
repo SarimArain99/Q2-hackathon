@@ -59,10 +59,10 @@ function Header() {
           <div className="hidden lg:flex items-center overflow-hidden">
             <input
               type="text"
-              className="px-4 py-2 outline-none border-y border-l border-[#0D0E43]"
-              placeholder="Search..."
+              className="px-4 py-2 outline-none border-y border-l focus:border-[#FB2E86] duration-500"
+              placeholder="Search"
             />
-            <button className="bg-[#FB2E86] p-2 border-y border-r border-[#0D0E43]">
+            <button className="bg-[#FB2E86] p-2 border-y border-r border-[#FB2E86]">
               <Image
                 src="/search.png"
                 alt="Search"

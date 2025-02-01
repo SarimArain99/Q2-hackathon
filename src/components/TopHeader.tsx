@@ -3,7 +3,7 @@ import React from "react";
 
 function TopHeader() {
   return (
-    <div className="bg-[#0D0E43] text-white flex flex-wrap gap-5 items-center justify-center px-4 py-2 lg:justify-around">
+    <div className="bg-[#0D0E43] text-white flex flex-wrap gap-5 items-center px-4 py-2 justify-around">
       <div className="flex items-center gap-4 lg:gap-10">
         <div className="flex items-center gap-1">
           <svg
@@ -27,7 +27,6 @@ function TopHeader() {
             </Link>
           </p>
         </div>
-        <p>|</p>
         <div className="flex items-center gap-1">
           <svg
             className="h-5 w-5"
@@ -90,7 +89,7 @@ function TopHeader() {
             Korean
           </option>
         </select>
-        <p>|</p>
+  
         <select className="bg-transparent text-sm lg:text-lg outline-none font-semibold">
           <option value="" className="text-black" hidden>
             Currencies
@@ -126,7 +125,7 @@ function TopHeader() {
             INR
           </option>
         </select>
-        <p>|</p>
+       
         <Link
           href="/login"
           className="flex items-center text-sm lg:text-base gap-1"
@@ -146,7 +145,6 @@ function TopHeader() {
           </svg>
           <p className="md:block hidden font-semibold text-lg">Login</p>
         </Link>
-        <p>|</p>
         <Link
           href="/wishlist"
           className="flex items-center gap-1 text-sm lg:text-base"
@@ -164,7 +162,6 @@ function TopHeader() {
           </svg>
           <p className="md:block hidden font-semibold text-lg"> WishList</p>
         </Link>
-        <p>|</p>
         <Link
           href="/cart"
           className="flex items-center text-sm lg:text-base gap-1"
