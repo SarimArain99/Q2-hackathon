@@ -56,7 +56,7 @@ const Cart = () => {
       </div>
       <div className="sm:px-10 px-5 min-h-screen">
         {cart.length === 0 ? (
-          <p className="text-2xl font-semibold text-center text-[#101750] items-center justify-center flex h-screen">
+          <p className="text-2xl font-semibold text-center text-[#FB2E86] items-center justify-center flex h-screen">
             Your cart is waiting to be filled! 🛒
           </p>
         ) : (

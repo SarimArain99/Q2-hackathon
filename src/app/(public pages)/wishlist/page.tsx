@@ -34,7 +34,7 @@ const Favourites = () => {
     <>
       {/* Wishlist Header */}
       <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20 flex flex-col justify-center">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#101750] text-center sm:text-left">
+        <h2 className="text-2xl pb-5 sm:text-3xl md:text-4xl font-bold text-[#101750] text-center sm:text-left">
           Wishlist
         </h2>
         <Breadcrumb>
@@ -50,9 +50,9 @@ const Favourites = () => {
         </Breadcrumb>
       </div>
 
-      <div className="pt-16 sm:px-10 px-5 min-h-screen">
+      <div className="sm:px-10 px-5 min-h-screen">
         {wishlist.length === 0 ? (
-          <p className="text-lg sm:text-xl font-semibold text-center text-[#101750]">
+          <p className="text-lg sm:text-xl font-semibold text-center text-[#FB2E86] h-screen flex items-center justify-center">
             Your wishlist is empty. Start adding your favorite items today!
           </p>
         ) : (
