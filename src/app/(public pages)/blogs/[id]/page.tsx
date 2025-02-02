@@ -17,9 +17,10 @@ import {
 const BlogDetails: React.FC = () => {
   const { id } = useParams();
   const blog = blogs.find((blog) => blog.id === Number(id));
+  
   if (!blog) {
     return (
-      <div className="text-center text-gray-500 py-10">
+      <div className="flex flex-col items-center justify-center min-h-screen text-gray-500 py-10">
         <h1 className="text-2xl font-bold text-[#101750]">Blog Not Found</h1>
         <p>We couldn&apos;t find the blog you were looking for.</p>
       </div>
@@ -30,10 +31,9 @@ const BlogDetails: React.FC = () => {
     <BlogShimmer />
   ) : (
     <div className="text-[#101750]">
-      <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
-        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold py-5 text-[#101750]">
-          {blog.title}
-        </h2>
+      {/* Blog Header */}
+      <div className="h-40 bg-[#F6F5FF] px-6 sm:px-12 md:px-20 lg:px-32 flex flex-col justify-center">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-center sm:text-left">{blog.title}</h2>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -51,21 +51,24 @@ const BlogDetails: React.FC = () => {
         </Breadcrumb>
       </div>
 
-      <div className="py-10">
-        <article className="flex flex-col lg:flex-row">
-          <Image
-            src={blog.image}
-            alt={blog.title}
-            className="px-2 h-auto mb-4 rounded-t-lg object-cover"
-            width={1000}
-            height={1000}
-            priority={true}
-          />
-          <div className="px-2 md:p-6 lg:max-w-[50%]">
+      {/* Blog Content */}
+      <div className="py-10 px-4 sm:px-8 md:px-16 lg:px-32">
+        <article className="flex flex-col lg:flex-row items-center gap-8">
+          <div className="w-full lg:w-1/2">
+            <Image
+              src={blog.image}
+              alt={blog.title}
+              className="rounded-lg object-cover w-full max-h-[500px]"
+              width={1000}
+              height={1000}
+              priority={true}
+            />
+          </div>
+          <div className="w-full lg:w-1/2 flex flex-col justify-center">
             <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold mb-4 text-[#101750]">
               {blog.title}
             </h1>
-            <div className="flex items-center text-gray-600 mb-4">
+            <div className="flex items-center text-gray-600 text-sm sm:text-base mb-4">
               <span className="mr-2">By {blog.author}</span>
               <span className="text-gray-400">|</span>
             </div>
