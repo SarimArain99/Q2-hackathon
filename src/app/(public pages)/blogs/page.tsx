@@ -38,6 +38,7 @@ function Page() {
 
   return (
     <div className="text-[#101750]">
+      {/* Header Section */}
       <div className="h-40 bg-[#F6F5FF] px-4 sm:px-8 md:px-16 lg:px-20">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold py-5 text-[#101750]">
           Blogs
@@ -54,8 +55,11 @@ function Page() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
+
+      {/* Main Content */}
       <div className="container mx-auto px-4 py-10 flex flex-col md:flex-row gap-10">
-        <main className="flex-1">
+        {/* Main Blogs Section */}
+        <main className="w-full md:w-2/3">
           {loading ? (
             <div>
               <BlogShimmer />
@@ -91,6 +95,7 @@ function Page() {
           )}
         </main>
 
+        {/* Sidebar Blogs Section */}
         <aside className="w-full md:w-1/3">
           {loading ? (
             <div>
@@ -100,7 +105,10 @@ function Page() {
             </div>
           ) : asideBlogs.length > 0 ? (
             <div>
-              <h3 className="text-xl font-bold mb-4">Checkout More Blogs</h3>
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-center font-bold mb-6 font-serif text-[#101750] underline decoration-2 underline-offset-8 transition-all duration-500">
+                Discover More Inspiring Blogs
+              </h3>
+
               {asideBlogs.map((blog) => (
                 <article key={blog.id} className="mb-6">
                   <h4 className="text-lg font-semibold mb-2">{blog.title}</h4>
@@ -123,6 +131,7 @@ function Page() {
         </aside>
       </div>
 
+      {/* Brand Section */}
       <div className="flex justify-center items-center py-10 px-4">
         <Image
           src="/brand.png"

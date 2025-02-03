@@ -136,7 +136,7 @@ export default function ProductPage() {
               }}
               className="w-44 sm:w-auto bg-[#fb2e86] text-white px-6 py-2 rounded-lg hover:bg-[#e73b86] transition"
             >
-              Add to Favorites
+              Add to Wishlist
             </button>
           </div>
         </div>

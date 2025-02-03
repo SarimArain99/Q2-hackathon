@@ -6,7 +6,7 @@ import Link from "next/link";
 function LatestBlogs() {
   return (
     <div className="mb-5">
-      <h1 className="text-[#151875] text-[42px] text-center font-bold">
+      <h1 className="text-[#151875] text-[30px] sm:text-[42px] text-center font-bold">
         Latest Blogs
       </h1>
       <div className="flex justify-center items-center">

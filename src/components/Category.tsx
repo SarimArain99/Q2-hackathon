@@ -19,7 +19,7 @@ async function Category() {
 
   return (
     <div>
-      <h1 className="text-[#151875] text-[42px] text-center my-5 font-bold">
+      <h1 className="text-[#151875] text-[30px] sm:text-[42px] text-center my-5 font-bold">
         Top Categories
       </h1>
       <div className="flex justify-center items-center">

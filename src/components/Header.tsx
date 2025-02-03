@@ -16,7 +16,7 @@ function Header() {
     <>
       <TopHeader />
       <div className="bg-white py-2">
-        <div className="flex items-center justify-between px-4 sm:px-8 md:px-16 lg:px-20">
+        <div className="flex items-center justify-between px-4 sm:px-8 md:px-16 lg:px-16 transition-all duration-500">
           <h1 className="text-[34px] font-bold text-[#0D0E43]">Hekto</h1>
           <div className="hidden lg:flex items-center gap-7">
             <Link
@@ -139,19 +139,19 @@ function Header() {
             >
               Help
             </Link>
-            <div className="flex items-center px-5 text-xl font-semibold w-full h-20 duration-500 bg-white text-[#0D0E43] hover:bg-[#fb2e86] group">
+            <div className="flex items-center text-xl font-semibold w-full h-16 sm:h-20 duration-500 bg-white text-[#0D0E43] hover:bg-[#fb2e86] group p-2 sm:p-4 rounded-lg">
               <input
                 type="text"
-                className="px-4 py-2 outline-none flex-grow border group-hover:border-white h-[50%] duration-500"
-                placeholder="Search..."
+                className="px-3 sm:px-4 py-2 outline-none flex-grow border border-gray-300 group-hover:border-white h-[38px] sm:h-[50px] duration-500 text-sm sm:text-base rounded-l-lg"
+                placeholder="Search"
               />
-              <button className="bg-[#FB2E86] p-2 border group-hover:border-white h-[50%] duration-500">
+              <button className="bg-[#FB2E86] p-2 sm:p-3 border border-pink-600 group-hover:border-white duration-500 rounded-r-lg">
                 <Image
                   src="/search.png"
                   alt="Search"
                   width={1000}
                   height={1000}
-                  className="h-6 w-6"
+                  className="h-5 w-5 sm:h-6 sm:w-6"
                 />
               </button>
             </div>

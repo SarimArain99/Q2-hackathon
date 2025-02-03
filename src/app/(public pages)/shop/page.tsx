@@ -32,21 +32,17 @@ function Shop() {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [cart, setCart] = useState<Product[]>([]);
-  const [wishlist, setWishlist] = useState<Product[]>([]);
 
-  // Fetch products from Sanity
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // Start loading
+      setLoading(true);
       const data = await client.fetch(`*[_type == "product"]`);
       setProducts(data);
-      setLoading(false); // Stop loading
+      setLoading(false);
     };
     fetchData();
   }, []);
 
-  // Filter products based on search and category
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name
       .toLowerCase()
@@ -55,16 +51,6 @@ function Shop() {
       selectedCategory === "all" || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
-
-  // Add to cart
-  const addToCart = (product: Product) => {
-    setCart((prevCart) => [...prevCart, product]);
-  };
-
-  // Add to wishlist
-  const addToWishlist = (product: Product) => {
-    setWishlist((prevWishlist) => [...prevWishlist, product]);
-  };
 
   return (
     <div className="mb-5">
@@ -85,10 +71,12 @@ function Shop() {
         </Breadcrumb>
       </div>
 
-      {/* Search and Filter Section */}
       <div className="bg-white p-6 flex flex-col md:flex-row justify-between items-center mt-5">
         <div className="mb-4 md:mb-0 flex items-center gap-2 w-full md:w-auto">
-          <label htmlFor="search" className="block text-gray-700 font-bold mb-0">
+          <label
+            htmlFor="search"
+            className="block text-gray-700 font-bold mb-0"
+          >
             Search:
           </label>
           <input
@@ -97,7 +85,7 @@ function Shop() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search Product"
-            className="p-2 border border-gray-300 rounded w-full md:w-64 outline-[#FB2E86] duration-500"
+            className="p-2 border border-gray-300 rounded w-full md:w-64 outline-[#FB2E86] duration-1000"
           />
         </div>
 
@@ -122,54 +110,18 @@ function Shop() {
         </div>
       </div>
 
-      <div className="flex justify-end mt-5 px-4">
-        <div className="flex gap-5">
-          <Link href="/cart">
-            <span className="cursor-pointer text-xl">
-              Cart ({cart.length})
-            </span>
-          </Link>
-          <Link href="/wishlist">
-            <span className="cursor-pointer text-xl">
-              Wishlist ({wishlist.length})
-            </span>
-          </Link>
-        </div>
-      </div>
-
       <div className="flex justify-center">
         {loading ? (
           <ProductShimmer />
         ) : (
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 px-3">
             {filteredProducts.map((product: Product) => (
-              <Link href={`/shop/${product._id}`}
+              <Link
+                href={`/shop/${product._id}`}
                 key={product._id}
                 className="h-[360px] w-[270px] shadow-lg shadow-gray-400 overflow-hidden mx-auto group hover:bg-[#151875] duration-700"
               >
                 <div className="relative h-[60%]">
-                  <Image
-                    src="/blueCart.png"
-                    alt="Add to Cart"
-                    width={1000}
-                    height={1000}
-                    className="h-6 w-6 hidden group-hover:block absolute top-1 left-2 duration-500"
-                    onClick={(e) => {
-                      e.preventDefault(); // Prevent navigation
-                      addToCart(product);
-                    }}
-                  />
-                  <Image
-                    src="/lovee.png"
-                    alt="Favorite"
-                    width={1000}
-                    height={1000}
-                    className="h-5 w-5 hidden group-hover:block absolute top-2 left-8 duration-500"
-                    onClick={(e) => {
-                      e.preventDefault(); // Prevent navigation
-                      addToWishlist(product);
-                    }}
-                  />
                   <Image
                     src={urlFor(product.image.asset._ref).url()}
                     alt={product.name}

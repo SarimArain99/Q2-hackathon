@@ -3,11 +3,11 @@ import React from "react";
 
 function TopHeader() {
   return (
-    <div className="bg-[#0D0E43] text-white flex flex-wrap gap-5 items-center px-4 py-2 justify-around">
-      <div className="flex items-center gap-4 lg:gap-10">
+    <div className="bg-[#0D0E43] text-white flex flex-wrap gap-4 items-center justify-center sm:justify-between py-2 px-3 sm:px-8 md:px-14 lg:px-16 xl:px-20 transition-all duration-500">
+      <div className="flex items-center gap-4 lg:gap-5">
         <div className="flex items-center gap-1">
           <svg
-            className="h-6 w-6"
+            className="h-4 lg:h-6 w-4 lg:w-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -18,7 +18,7 @@ function TopHeader() {
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />{" "}
             <polyline points="22,6 12,13 2,6" />
           </svg>
-          <p className="text-xs lg:text-lg font-semibold">
+          <p className="text-xs lg:text-lg lg:font-semibold">
             <Link
               href="mailto:sarimarain99@gmail.com"
               className="hover:underline outline-none"
@@ -29,7 +29,7 @@ function TopHeader() {
         </div>
         <div className="flex items-center gap-1">
           <svg
-            className="h-5 w-5"
+            className="h-4 lg:h-5 w-4 lg:w-5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -41,14 +41,14 @@ function TopHeader() {
           </svg>
           <Link
             href="tel:03103236272"
-            className="text-sm lg:text-base font-semibold"
+            className="text-xs lg:text-base lg:font-semibold"
           >
             03103236272
           </Link>
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <select className="bg-transparent text-sm lg:text-lg border-none outline-none font-semibold">
+        <select className="bg-transparent text-xs lg:text-lg border-none outline-none font-semibold">
           <option value="" className="text-black" hidden>
             Languages
           </option>
@@ -89,8 +89,8 @@ function TopHeader() {
             Korean
           </option>
         </select>
-  
-        <select className="bg-transparent text-sm lg:text-lg outline-none font-semibold">
+
+        <select className="bg-transparent text-xs lg:text-lg outline-none font-semibold">
           <option value="" className="text-black" hidden>
             Currencies
           </option>
@@ -125,13 +125,10 @@ function TopHeader() {
             INR
           </option>
         </select>
-       
-        <Link
-          href="/login"
-          className="flex items-center text-sm lg:text-base gap-1"
-        >
+
+        <Link href="/login" className="flex items-center gap-1">
           <svg
-            className="h-6 w-6"
+            className="h-4 lg:h-6 w-4 lg:w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -143,14 +140,13 @@ function TopHeader() {
               d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <p className="md:block hidden font-semibold text-lg">Login</p>
+          <p className="md:block hidden font-semibold text-xs lg:text-lg">
+            Login
+          </p>
         </Link>
-        <Link
-          href="/wishlist"
-          className="flex items-center gap-1 text-sm lg:text-base"
-        >
+        <Link href="/wishlist" className="flex items-center gap-1">
           <svg
-            className="h-6 w-6"
+            className="h-4 lg:h-6 w-4 lg:w-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -160,14 +156,14 @@ function TopHeader() {
           >
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
-          <p className="md:block hidden font-semibold text-lg"> WishList</p>
+          <p className="md:block hidden font-semibold text-xs lg:text-lg">
+            {" "}
+            Wishlist
+          </p>
         </Link>
-        <Link
-          href="/cart"
-          className="flex items-center text-sm lg:text-base gap-1"
-        >
+        <Link href="/cart" className="flex items-center gap-1">
           <svg
-            className="h-6 w-6"
+            className="h-4 lg:h-6 w-4 lg:w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -179,7 +175,10 @@ function TopHeader() {
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
             />
           </svg>
-          <p className="md:block hidden font-semibold text-lg"> Cart</p>
+          <p className="md:block hidden font-semibold text-xs lg:text-lg">
+            {" "}
+            Cart
+          </p>
         </Link>
       </div>
     </div>

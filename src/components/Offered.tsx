@@ -4,7 +4,7 @@ import React from "react";
 function Offered() {
   return (
     <div className="border-y-2 mt-10 border-[#151875] ">
-      <h1 className="text-[#151875] text-[42px] font-bold text-center my-5">
+      <h1 className="text-[#151875] text-[30px] sm:text-[42px] font-bold text-center my-5">
         What Hekto Offers!
       </h1>
       <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 px-5 items-center">

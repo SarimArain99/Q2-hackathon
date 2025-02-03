@@ -20,7 +20,7 @@ async function Featured() {
 
   return (
     <div>
-      <h1 className="text-[#1A0B5B] text-[42px] font-bold text-center py-5">
+      <h1 className="text-[#1A0B5B] text-[30px] sm:text-[42px] font-bold text-center py-5">
         Featured Products
       </h1>
       <div className="flex justify-center">
